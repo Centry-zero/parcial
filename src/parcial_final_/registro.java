@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package parcial_final_;
 
 import javax.swing.ButtonGroup;
@@ -23,6 +20,7 @@ public class registro extends javax.swing.JFrame {
      */
     public registro() {
         initComponents();
+        this.setLocationRelativeTo(this);
     }
     
 
