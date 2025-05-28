@@ -1,11 +1,14 @@
 package libreria;
 
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import libreria.*;
+
 
 public class libreria_total {
 
@@ -32,4 +35,29 @@ public class libreria_total {
         }
         return vector;
     }
+  
+
+public class Metodos {
+    private ArrayList<Inmueble> listaInmuebles = new ArrayList<>();
+    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+    private ArrayList<Visita> listaVisitas = new ArrayList<>();
+    private ArrayList<Contrato> listaContratos = new ArrayList<>();
+
+    public void registrarUsuario(Usuario u) {
+        listaUsuarios.add(u);
+    }
+
+    public void registrarInmueble(Inmueble i) {
+        listaInmuebles.add(i);
+    }
+
+    public void agendarVisita(Visita v) {
+        listaVisitas.add(v);
+    }
+
+    public void registrarContrato(Contrato c) {
+        listaContratos.add(c);
+    }
+}
+
 }
