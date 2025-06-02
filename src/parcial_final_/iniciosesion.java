@@ -4,12 +4,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import libreria.libreria_total;
 
 public class iniciosesion extends javax.swing.JFrame {
 
     FondoPanel fondo= new FondoPanel();
-    libreria_total m= new libreria_total();
+   
     public iniciosesion() {
         
         this.setContentPane(fondo);
