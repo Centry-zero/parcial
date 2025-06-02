@@ -16,6 +16,7 @@ public class filtro extends javax.swing.JFrame {
      */
     public filtro() {
         initComponents();
+        this.setLocationRelativeTo(this);
     }
 
     /**

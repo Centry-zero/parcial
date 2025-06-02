@@ -17,6 +17,7 @@ public class formulario extends javax.swing.JFrame {
      */
     public formulario() {
         initComponents();
+        this.setLocationRelativeTo(this);
     }
 
     /**

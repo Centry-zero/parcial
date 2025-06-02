@@ -15,6 +15,7 @@ public class asignarroles extends javax.swing.JFrame {
      */
     public asignarroles() {
         initComponents();
+        this.setLocationRelativeTo(this);
     }
 
     /**

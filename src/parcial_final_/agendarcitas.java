@@ -1,20 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package parcial_final_;
 
-/**
- *
- * @author COMPUMAX
- */
+
 public class agendarcitas extends javax.swing.JFrame {
 
-    /**
-     * Creates new form propiedades
-     */
+   
     public agendarcitas() {
         initComponents();
+        this.setLocationRelativeTo(this);
     }
 
     /**

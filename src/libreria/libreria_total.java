@@ -1,5 +1,6 @@
 package libreria;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Random;
@@ -7,6 +8,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import libreria.*;
 
 
@@ -59,5 +61,18 @@ public class Metodos {
         listaContratos.add(c);
     }
 }
+class FondoPanel extends JPanel {
 
+    private Image imagen;
+
+    @Override
+    public void paint(Graphics g) {
+        imagen = new ImageIcon(getClass().getResource("/imagenes/FONDO.PNG")).getImage();
+
+        g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+
+        setOpaque(false);
+        super.paint(g);
+    }
+}
 }

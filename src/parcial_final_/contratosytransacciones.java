@@ -15,6 +15,7 @@ public class contratosytransacciones extends javax.swing.JFrame {
      */
     public contratosytransacciones() {
         initComponents();
+        this.setLocationRelativeTo(this);
     }
 
     /**
