@@ -1,19 +1,31 @@
 package libreria;
 
 public class Usuario {
-    private String nombre;
-    private String cedula;
-    private String rol;
+    private String cargo;
+    private String nombreCompleto;
     private String usuario;
     private String contrasena;
 
-    public Usuario(String nombre, String cedula, String rol, String usuario, String contrasena) {
-        this.nombre = nombre;
-        this.cedula = cedula;
-        this.rol = rol;
+    public Usuario(String cargo, String nombreCompleto, String usuario, String contrasena) {
+        this.cargo = cargo;
+        this.nombreCompleto = nombreCompleto;
         this.usuario = usuario;
         this.contrasena = contrasena;
     }
 
-    // Getters y Setters
+    public String getCargo() {
+        return cargo;
+    }
+
+    public String getNombre() {
+        return nombreCompleto;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getContraseña() {
+        return contrasena;
+    }
 }
