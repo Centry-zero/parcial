@@ -1,5 +1,9 @@
 package parcial_final_;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import libreria.libreria_total;
 
@@ -21,9 +25,17 @@ public class menu extends javax.swing.JFrame {
         String rutaImagen = null;
         jLabel5.setIcon(libreria_total.cargarYEscalarImagen(rutaImagen, jLabel5.getWidth(), jLabel5.getHeight()));
         if (cargoUsuario.equalsIgnoreCase("CLIENTE")) {
-            registro.removeTabAt(3);
-            registro.removeTabAt(2);
-            registro.removeTabAt(4);
+            int total = registro.getTabCount();
+
+            if (total > 4) {
+                registro.removeTabAt(4);
+            }
+            if (total > 3) {
+                registro.removeTabAt(3);
+            }
+            if (total > 2) {
+                registro.removeTabAt(2);
+            }
         } else if (cargoUsuario.equalsIgnoreCase("PROPIETARIO")) {
             registro.removeTabAt(3);
             registro.removeTabAt(2);
@@ -58,7 +70,7 @@ public class menu extends javax.swing.JFrame {
 
     private void filtrarPorTipoArriendo(String tipo) {
         DefaultTableModel model = (DefaultTableModel) ventanaPrincipal.getTblLista().getModel();
-        jComboBox1.removeAllItems(); 
+        jComboBox1.removeAllItems();
 
         for (int i = 0; i < model.getRowCount(); i++) {
             String tipoInmueble = model.getValueAt(i, 3).toString();
@@ -173,7 +185,7 @@ public class menu extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaArriendo = new javax.swing.JTextArea();
-        jLabel6 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
         venta = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -252,7 +264,12 @@ public class menu extends javax.swing.JFrame {
         jTextAreaArriendo.setRows(5);
         jScrollPane1.setViewportView(jTextAreaArriendo);
 
-        jLabel6.setText("LINK VIDEO");
+        jButton11.setText("video");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout arriendoLayout = new javax.swing.GroupLayout(arriendo);
         arriendo.setLayout(arriendoLayout);
@@ -262,21 +279,24 @@ public class menu extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(arriendoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(arriendoLayout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(arriendoLayout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(arriendoLayout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(arriendoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(arriendoLayout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(45, 45, 45)
                         .addGroup(arriendoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(arriendoLayout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(jButton11)))))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
         arriendoLayout.setVerticalGroup(
@@ -290,14 +310,13 @@ public class menu extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(arriendoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(arriendoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         registro.addTab("ARRIENDO", arriendo);
@@ -605,7 +624,9 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_rcasaActionPerformed
 
     private void rcontratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rcontratoActionPerformed
-        // TODO add your handling code here:
+        agendarcontratos contrato = new agendarcontratos(ventanaPrincipal.getTblLista1());
+        contrato.setVisible(true);
+       ventanaPrincipal.setVisible(false);
     }//GEN-LAST:event_rcontratoActionPerformed
 
     private void tablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablasActionPerformed
@@ -631,6 +652,10 @@ public class menu extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         filtrarPorTipoArriendo("Local");        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -672,6 +697,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JLabel f1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -689,7 +715,6 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;

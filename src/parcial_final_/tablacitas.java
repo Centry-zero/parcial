@@ -20,6 +20,10 @@ public class tablacitas extends javax.swing.JFrame {
         return tblLista;
     }
 
+    public javax.swing.JTable getTblLista1() {
+        return tblLista1;
+    }
+
     public javax.swing.JTable getJTable1() {
         return jTable1;
     }
@@ -380,11 +384,11 @@ public class tablacitas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblTotalRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblTotalRegActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_lblTotalRegActionPerformed
 
     private void lblTotalVenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblTotalVenActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_lblTotalVenActionPerformed
 
     private void btnRegVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegVentaActionPerformed
@@ -399,7 +403,8 @@ public class tablacitas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegVenta1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        agendarcontratos v = new agendarcontratos(tblLista1);
+        v.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

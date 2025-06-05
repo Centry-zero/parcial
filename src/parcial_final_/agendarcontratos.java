@@ -1,22 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package parcial_final_;
 
-/**
- *
- * @author COMPUMAX
- */
-public class agendarcontratos extends javax.swing.JFrame {
+import javax.swing.JTable;
 
-    /**
-     * Creates new form agendarcontratos
-     */
-    public agendarcontratos() {
+
+public class agendarcontratos extends javax.swing.JFrame {
+    private javax.swing.JTable tablaContratos;
+
+    public agendarcontratos(JTable tablaContratos) {
         initComponents();
         this.setTitle("contratos");
+        this.tablaContratos = tablaContratos;
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,6 +70,11 @@ public class agendarcontratos extends javax.swing.JFrame {
         jLabel10.setText("INICIO CONTRATO");
 
         jButton1.setText("GUARDAD");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE", "Agente Rodríguez", "Agente Silva", "Agente Díaz", "Agente Torres" }));
 
@@ -179,40 +180,47 @@ public class agendarcontratos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+String id = jTextField1.getText();
+String tipoContrato = jTextField2.getText();
+String propiedad = jTextField4.getText();
+String codigo = jTextField3.getText();
+String cliente = jTextField9.getText();
+String agente = jComboBox1.getSelectedItem().toString();
+String estado = jComboBox2.getSelectedItem().toString();
+String valor = jTextField5.getText();
+String inicio = jTextField6.getText();
+String fin = jTextField10.getText();
+
+if (id.isEmpty() || tipoContrato.isEmpty() || propiedad.isEmpty() || codigo.isEmpty() ||
+    cliente.isEmpty() || agente.equals("SELECCIONE") || estado.equals("SELECCIONAR") ||
+    valor.isEmpty() || inicio.isEmpty() || fin.isEmpty()) {
+
+    javax.swing.JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.");
+    return;
+}
+
+
+javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tablaContratos.getModel();
+model.addRow(new Object[]{id, tipoContrato, propiedad, codigo, cliente, agente, estado, valor, inicio, fin});
+
+dispose();        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(agendarcontratos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(agendarcontratos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(agendarcontratos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(agendarcontratos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            JTable tablaDummy = new JTable(new javax.swing.table.DefaultTableModel(
+                new Object[][]{}, 
+                new String[]{"ID", "TIPO DE CONTRATO", "PROPIEDAD", "CODIGO", "CLIENTE", "AGENTE", "ESTADO", "VALOR", "INICIO", "FIN"}
+            ));
+            new agendarcontratos(tablaDummy).setVisible(true);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new agendarcontratos().setVisible(true);
-            }
-        });
-    }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
