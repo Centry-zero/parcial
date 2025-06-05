@@ -23,10 +23,19 @@ public class iniciosesion extends javax.swing.JFrame {
     }
 
     private void cargarUsuarios() {
-        listaUsuarios.add(new Usuario("ADMINISTRADOR", "Administrador General", "admin", "1234"));
+        listaUsuarios.add(new Usuario("ADMINISTRADOR", "JEFE MAESTRO", "admin", "1234"));
         listaUsuarios.add(new Usuario("AGENTE", "Agente Rodríguez", "agente01", "1234"));
+        listaUsuarios.add(new Usuario("AGENTE", "Agente Silva", "agente02", "1234"));
+        listaUsuarios.add(new Usuario("AGENTE", "Agente Díaz", "agente03", "1234"));
+        listaUsuarios.add(new Usuario("AGENTE", "Agente Torres", "agente04", "1234"));
         listaUsuarios.add(new Usuario("CLIENTE", "Carlos Pérez", "cliente01", "1234"));
-        listaUsuarios.add(new Usuario("VENDEDOR", "Vendedor Gómez", "vendedor01", "1234"));
+        listaUsuarios.add(new Usuario("CLIENTE", "María Gómez", "cliente02", "1234"));
+        listaUsuarios.add(new Usuario("CLIENTE", "Raul Gualdron", "cliente03", "1234"));
+        listaUsuarios.add(new Usuario("CLIENTE", "Ana Ramírez", "cliente04", "1234"));
+        listaUsuarios.add(new Usuario("PROPIETARIO", "Luis Ramon", "prop01", "1234"));
+        listaUsuarios.add(new Usuario("PROPIETARIO", "Sara López", "prop02", "1234"));
+        listaUsuarios.add(new Usuario("PROPIETARIO", "Pedro Ruiz", "prop03", "1234"));
+        listaUsuarios.add(new Usuario("PROPIETARIO", "Javier Salas", "prop04", "1234"));
     }
 
     @SuppressWarnings("unchecked")
@@ -165,7 +174,7 @@ public class iniciosesion extends javax.swing.JFrame {
             if (u.getCargo().equalsIgnoreCase(cargo) && u.getUsuario().equals(usuario)) {
                 if (u.getContraseña().equals(contrasena)) {
                     JOptionPane.showMessageDialog(this, "¡Bienvenido " + u.getNombre() + "!");
-                    menu z = new menu();
+                    menu z = new menu(u.getCargo());
                     z.setVisible(true);
                     dispose();
                     return;

@@ -19,5 +19,4 @@ public class Inmueble {
         this.propietario = propietario;
     }
 
-    // Getters y Setters
 }
