@@ -46,18 +46,18 @@ public static void cargarVentas(javax.swing.JTable tabla) {
     javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tabla.getModel();
 
     Object[][] datos = {
-        {"60319991", "Luis Ramon", "3011234567", "Casa", "C101", "Vendida", 180000000, "Cra 12 #34-56"},
-        {"119314619", "Luis Ramon", "3109876543", "Apartamento", "A205", "Arriendo", 220000000, "Cll 45 #23-11"},
-        {"109044675", "Luis Ramon", "3125566778", "Local", "L303", "Disponible", 95000000, "Av 3 #9-21"},
-        {"60234551", "Luis Ramon", "3001122334", "Apartamento", "A306", "Vendida", 200000000, "Cra 7 #66-90"},
-        {"120096413", "Sara López", "3209988776", "Casa", "C404", "Arriendo", 185000000, "Cll 10 #5-32"},
-        {"562314697", "Sara López", "3114455667", "Casa", "C505", "Disponible", 195000000, "Cll 33 #44-12"},
-        {"125535354", "Sara López", "3007788990", "Apartamento", "A707", "Vendida", 210000000, "Av 1 #2-45"},
-        {"109048812", "Sara López", "3165544332", "Local", "L808", "Arriendo", 98000000, "Cll 90 #77-10"},
-        {"114477883", "Pedro Ruiz", "3186677889", "Casa", "C909", "Disponible", 175000000, "Cra 40 #18-99"},
-        {"60232355", "Pedro Ruiz", "3133344556", "Apartamento", "A010", "Vendida", 230000000, "Av 6 #5-20"},
-        {"125425632", "Javier Salas", "3045566788", "Casa", "C111", "Arriendo", 200000000, "Cra 17 #45-88"},
-        {"121234567", "Javier Salas", "3028899000", "Local", "L121", "Disponible", 89000000, "Cll 20 #99-01"}
+        {"60319991", "Luis Ramon", "3011234567", "Casa", "C101", "Venta", 180000000, "Cra 12 #34-56","src/imagenes/casa1.png"},
+        {"119314619", "Luis Ramon", "3109876543", "Apartamento", "A205", "Venta", 220000000, "Cll 45 #23-11","src/imagenes/apartamento1.png"},
+        {"109044675", "Luis Ramon", "3125566778", "Local", "L303", "Venta", 95000000, "Av 3 #9-21","src/imagenes/local1.png"},
+        {"60234551", "Luis Ramon", "3001122334", "Apartamento", "A306", "Arriendo", 200000000, "Cra 7 #66-90","src/imagenes/apartamento2.png"},
+        {"120096413", "Sara López", "3209988776", "Casa", "C404", "Arriendo", 185000000, "Cll 10 #5-32","src/imagenes/casa2.png"},
+        {"562314697", "Sara López", "3114455667", "Casa", "C505", "Arriendo", 195000000, "Cll 33 #44-12","src/imagenes/casa3.png"},
+        {"125535354", "Sara López", "3007788990", "Apartamento", "A707", "Venta", 210000000, "Av 1 #2-45","src/imagenes/apartamento3.png"},
+        {"109048812", "Sara López", "3165544332", "Local", "L808", "Arriendo", 98000000, "Cll 90 #77-10","src/imagenes/local2.png"},
+        {"114477883", "Pedro Ruiz", "3186677889", "Casa", "C909", "Venta", 175000000, "Cra 40 #18-99","src/imagenes/casa4.png"},
+        {"60232355", "Pedro Ruiz", "3133344556", "Apartamento", "A010", "Arriendo", 230000000, "Av 6 #5-20","src/imagenes/apartamento5.png"},
+        {"125425632", "Javier Salas", "3045566788", "Casa", "C111", "Arriendo", 200000000, "Cra 17 #45-88","src/imagenes/casa7.png"},
+        {"121234567", "Javier Salas", "3028899000", "Local", "L121", "Venta", 89000000, "Cll 20 #99-01","src/imagenes/local5.png"}
     };
 
     for (Object[] fila : datos) {
@@ -120,5 +120,10 @@ public static void cargarContratos(javax.swing.JTable tabla) {
     for (Object[] fila : datos) {
         model.addRow(fila);
     }
+}
+public static ImageIcon cargarYEscalarImagen(String ruta, int ancho, int alto) {
+    ImageIcon icono = new ImageIcon(ruta);
+    Image imagen = icono.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
+    return new ImageIcon(imagen);
 }
 }

@@ -1,16 +1,24 @@
 package parcial_final_;
 
+import java.awt.Image;
+import java.io.File;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 public class registro extends javax.swing.JFrame {
+
+    private javax.swing.JLabel jLabelImagen;
+    private String rutaImagenSeleccionada = "";
 
     javax.swing.JTable tablaDestino;
     tablacitas ventanaPrincipal;
@@ -18,6 +26,7 @@ public class registro extends javax.swing.JFrame {
     public registro(javax.swing.JTable tabla, tablacitas ventana) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setTitle("Registro");
         this.tablaDestino = tabla;
         this.ventanaPrincipal = ventana;
     }
@@ -76,7 +85,7 @@ public class registro extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Telefono");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "seleccionar", "vendido", "disponible", "arriendo" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "seleccionar", "venta", "arriendo" }));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Estado");
@@ -224,6 +233,7 @@ public class registro extends javax.swing.JFrame {
         jTabbedPane1.addTab("Inmueble", jPanel2);
 
         jLabel8.setText("imagen");
+        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButton1.setText("GUARDAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -232,33 +242,37 @@ public class registro extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("SUBIR");
+        jButton2.setText("cargar imagen");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(99, 99, 99))
+                .addGap(38, 38, 38))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Cargar archivos", jPanel3);
@@ -267,20 +281,15 @@ public class registro extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-
-    private void rbnCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnCasaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbnCasaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String id = txtNom.getText();
@@ -292,16 +301,18 @@ public class registro extends javax.swing.JFrame {
         String valor = txtvalor.getText();
         String direccion = txtdir.getText();
 
-// Validar que no haya campos vacíos
+       
         if (id.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || tipo.isEmpty() || codigo.isEmpty() || valor.isEmpty() || direccion.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.");
             return;
         }
 
         DefaultTableModel model = (DefaultTableModel) tablaDestino.getModel();
-        model.addRow(new Object[]{id, nombre, telefono, tipo, codigo, estado, valor, direccion});
+        model.addRow(new Object[]{
+            id, nombre, telefono, tipo, codigo, estado, valor, direccion, rutaImagenSeleccionada
+        });
 
-// Calcular totales si es necesario
+        // Calcular totales si es necesario
         ventanaPrincipal.calcularTotalesRegistro();
 
         dispose(); // Cerrar formulario      // TODO add your handling code here:
@@ -310,6 +321,34 @@ public class registro extends javax.swing.JFrame {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void rbnCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnCasaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbnCasaActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imágenes", "jpg", "png", "jpeg", "gif");
+        fc.setFileFilter(filtro);
+
+        int res = fc.showOpenDialog(this);
+        if (res == JFileChooser.APPROVE_OPTION) {
+            File archivo = fc.getSelectedFile();
+            if (archivo != null && archivo.exists()) {
+                rutaImagenSeleccionada = archivo.getAbsolutePath(); 
+
+                ImageIcon icono = new ImageIcon(rutaImagenSeleccionada);
+                Image imagen = icono.getImage().getScaledInstance(
+                        jLabel8.getWidth(), jLabel8.getHeight(), Image.SCALE_SMOOTH
+                );
+
+                jLabel8.setIcon(new ImageIcon(imagen));
+                jLabel8.setText("");
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
         javax.swing.JTable tabla = new javax.swing.JTable(new javax.swing.table.DefaultTableModel(
