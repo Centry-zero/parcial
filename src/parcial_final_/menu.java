@@ -11,12 +11,22 @@ public class menu extends javax.swing.JFrame {
 
     public tablacitas ventanaPrincipal;
 
-    public menu(String cargoUsuario) {
+    private String nombreUsuario;
+
+    public menu(String cargoUsuario, String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+        ventanaPrincipal = new tablacitas();
         ventanaPrincipal = new tablacitas();
         initComponents();
         this.setLocationRelativeTo(this);
         m.imagen_Label(f1, "src/imagenes/LOGO.png");
         this.setTitle("menu principal");
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarInmueblePropietario();
+            }
+        });
+        cargarMisInmuebles();
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mostrarInmuebleArriendo();
@@ -24,22 +34,23 @@ public class menu extends javax.swing.JFrame {
         });
         String rutaImagen = null;
         jLabel5.setIcon(libreria_total.cargarYEscalarImagen(rutaImagen, jLabel5.getWidth(), jLabel5.getHeight()));
-        if (cargoUsuario.equalsIgnoreCase("CLIENTE")) {
-            int total = registro.getTabCount();
-
-            if (total > 4) {
-                registro.removeTabAt(4);
-            }
-            if (total > 3) {
-                registro.removeTabAt(3);
-            }
-            if (total > 2) {
-                registro.removeTabAt(2);
-            }
-        } else if (cargoUsuario.equalsIgnoreCase("PROPIETARIO")) {
-            registro.removeTabAt(3);
-            registro.removeTabAt(2);
+      if (cargoUsuario.equalsIgnoreCase("CLIENTE")) {
+        int total = registro.getTabCount();
+        if (total > 4) registro.removeTabAt(4);
+        if (total > 3) registro.removeTabAt(3);
+        if (total > 2) registro.removeTabAt(2);
+    } else if (cargoUsuario.equalsIgnoreCase("PROPIETARIO")) {
+        int total = registro.getTabCount();
+        if (total > 3) registro.removeTabAt(3);
+        if (total > 2) registro.removeTabAt(2);
+    } else if (cargoUsuario.equalsIgnoreCase("AGENTE")) {
+    for (int i = 0; i < registro.getTabCount(); i++) {
+        if (registro.getTitleAt(i).equalsIgnoreCase("MIS INMUEBLES")) {
+            registro.removeTabAt(i);
+            break;
         }
+    }
+    }
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mostrarInmuebleSeleccionado();
@@ -47,8 +58,67 @@ public class menu extends javax.swing.JFrame {
         });
     }
 
-    public menu() {
-        this("ADMINISTRADOR");
+    private void cargarMisInmuebles() {
+        DefaultTableModel model = (DefaultTableModel) ventanaPrincipal.getTblLista().getModel();
+        jComboBox3.removeAllItems();
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String propietario = model.getValueAt(i, 1).toString(); // Nombre
+            String codigo = model.getValueAt(i, 4).toString();
+
+            if (nombreUsuario.equalsIgnoreCase("JEFE MAESTRO")) {
+                jComboBox3.addItem(codigo); // Admin ve todo
+            } else if (propietario.equalsIgnoreCase(nombreUsuario)) {
+                jComboBox3.addItem(codigo);
+            }
+        }
+    }
+
+    private void mostrarInmueblePropietario() {
+        String codigoSeleccionado = (String) jComboBox3.getSelectedItem();
+        if (codigoSeleccionado == null || codigoSeleccionado.equalsIgnoreCase("SELECCIONAR")) {
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) ventanaPrincipal.getTblLista().getModel();
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String codigo = model.getValueAt(i, 4).toString();
+
+            if (codigo.equalsIgnoreCase(codigoSeleccionado)) {
+                String nombre = model.getValueAt(i, 1).toString();
+                String telefono = model.getValueAt(i, 2).toString();
+                String tipo = model.getValueAt(i, 3).toString();
+                String estado = model.getValueAt(i, 5).toString();
+                String valor = model.getValueAt(i, 6).toString();
+                String direccion = model.getValueAt(i, 7).toString();
+                Object celda = model.getValueAt(i, 8);
+
+                // Mostrar descripción
+                jTextArea3.setText(
+                        "Propietario: " + nombre + "\n"
+                        + "Teléfono: " + telefono + "\n"
+                        + "Tipo: " + tipo + "\n"
+                        + "Estado: " + estado + "\n"
+                        + "Valor: $" + valor + "\n"
+                        + "Dirección: " + direccion
+                );
+
+                // Mostrar imagen si existe
+                if (celda != null && !celda.toString().isEmpty()) {
+                    String rutaImagen = celda.toString();
+                    System.out.println("Imagen cargada desde: " + rutaImagen);
+                    m.imagen_Label(jLabel8, rutaImagen);
+                    jLabel8.setText("");
+                } else {
+                    System.out.println("Imagen no disponible");
+                    jLabel8.setIcon(null);
+                    jLabel8.setText("Sin imagen");
+                }
+
+                break;
+            }
+        }
     }
 
     private void filtrarPorTipo(String tipo) {
@@ -214,6 +284,7 @@ public class menu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         f1 = new javax.swing.JLabel();
+        jButton12 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -452,6 +523,11 @@ public class menu extends javax.swing.JFrame {
         });
 
         jButton15.setText("SEGUIMIENTOS");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         rcontrato.setText("REGISTRA CONTRATOS");
         rcontrato.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -510,7 +586,6 @@ public class menu extends javax.swing.JFrame {
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR" }));
 
-        jLabel8.setText("jLabel8");
         jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jTextArea3.setColumns(20);
@@ -570,6 +645,15 @@ public class menu extends javax.swing.JFrame {
         f1.setText("IMAGEN");
         jPanel2.add(f1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 120));
 
+        jButton12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton12.setText("salir ");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 40, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -626,7 +710,7 @@ public class menu extends javax.swing.JFrame {
     private void rcontratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rcontratoActionPerformed
         agendarcontratos contrato = new agendarcontratos(ventanaPrincipal.getTblLista1());
         contrato.setVisible(true);
-       ventanaPrincipal.setVisible(false);
+        ventanaPrincipal.setVisible(false);
     }//GEN-LAST:event_rcontratoActionPerformed
 
     private void tablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablasActionPerformed
@@ -654,40 +738,24 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-
+  libreria_total.abrirVideo("src/imagenes/casa.mp4");
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        formularioseguimiento form = new formularioseguimiento(ventanaPrincipal.getTblLista2());
+        form.setVisible(true);
+        ventanaPrincipal.setVisible(false);
 
-        /* Create and display the form */
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menu().setVisible(true);
+                new menu("ADMINISTRADOR", "JEFE MAESTRO").setVisible(true);
             }
         });
     }
@@ -698,6 +766,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

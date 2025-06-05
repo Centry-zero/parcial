@@ -174,7 +174,7 @@ public class iniciosesion extends javax.swing.JFrame {
             if (u.getCargo().equalsIgnoreCase(cargo) && u.getUsuario().equals(usuario)) {
                 if (u.getContraseña().equals(contrasena)) {
                     JOptionPane.showMessageDialog(this, "¡Bienvenido " + u.getNombre() + "!");
-                    menu z = new menu(u.getCargo());
+                    menu z = new menu(u.getCargo(), u.getNombre());
                     z.setVisible(true);
                     dispose();
                     return;

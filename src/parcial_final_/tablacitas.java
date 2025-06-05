@@ -20,6 +20,10 @@ public class tablacitas extends javax.swing.JFrame {
         return tblLista;
     }
 
+    public javax.swing.JTable getTblLista2() {
+        return tblLista2;
+    }
+
     public javax.swing.JTable getTblLista1() {
         return tblLista1;
     }
@@ -333,6 +337,11 @@ public class tablacitas extends javax.swing.JFrame {
         jScrollPane4.setViewportView(tblLista2);
 
         jButton2.setText("REGISTRO DE SEGUIMIENTO");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("salir");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -399,7 +408,6 @@ public class tablacitas extends javax.swing.JFrame {
     private void btnRegVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegVenta1ActionPerformed
         agendarcitas ventana = new agendarcitas(jTable1, tblLista);
         ventana.setVisible(true);
-
     }//GEN-LAST:event_btnRegVenta1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -408,49 +416,31 @@ public class tablacitas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.setVisible(false);  // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        this.setVisible(false);   // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        this.setVisible(false);    // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        this.setVisible(false);        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formularioseguimiento ventana = new formularioseguimiento(tblLista2);
+                ventana.setVisible(true);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(tablacitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(tablacitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(tablacitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(tablacitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        });
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-        /* Create and display the form */
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new tablacitas().setVisible(true);

@@ -1,19 +1,35 @@
 package libreria;
 
+import java.awt.Desktop;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import libreria.*;
 
 
 public class libreria_total {
-
+    
+public static void abrirVideo(String rutaVideo) {
+    try {
+        File archivo = new File(rutaVideo);
+        if (archivo.exists()) {
+            Desktop.getDesktop().open(archivo);
+        } else {
+            JOptionPane.showMessageDialog(null, "El archivo no existe: " + rutaVideo);
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "Error al abrir el video: " + e.getMessage());
+    }
+}
     private void imagen_botton(JButton btn, String ruta) {//hay que cargar las imagenes desde cada boton 
         ImageIcon img = new ImageIcon(ruta);
         Image imgEscalada = img.getImage().getScaledInstance(btn.getWidth(), btn.getHeight(), Image.SCALE_SMOOTH);
